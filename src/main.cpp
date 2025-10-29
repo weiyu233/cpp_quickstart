@@ -6,7 +6,7 @@
 
 int main() {
     try {
-        // 1) 读取数据（可把工作目录设为项目根，或用相对路径 data/fi_data.json）
+        // 1) 读取数据
         std::ifstream f("data/fi_data.json");
         if (!f.is_open()) {
             std::cerr << "Can't open data/fi_data.json\n";
@@ -26,6 +26,10 @@ int main() {
         auto coll = mongo_get_collection();
         mongo_upsert_fi_data(coll, arr);
         mongo_query_demo(coll);
+
+        if constexpr (true) {
+            mongo_query_update_many_usd_price(coll, 0.2);
+        }
 
         return 0;
     } catch (const std::exception& e) {

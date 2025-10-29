@@ -4,7 +4,6 @@ project(cpp_dual_db CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# 源码
 add_executable(cpp_dual_db
         src/main.cpp
         src/db_pg.cpp
@@ -18,7 +17,7 @@ target_include_directories(cpp_dual_db PRIVATE include)
 find_package(nlohmann_json CONFIG REQUIRED)
 target_link_libraries(cpp_dual_db PRIVATE nlohmann_json::nlohmann_json)
 
-# --- libpqxx（优先 CMake config，其次 pkg-config）
+# --- libpqxx
 find_package(pqxx QUIET CONFIG)
 if (pqxx_FOUND)
     message(STATUS "Using libpqxx via CMake config")
@@ -30,7 +29,7 @@ else()
     target_link_libraries(cpp_dual_db PRIVATE PkgConfig::PQXX)
 endif()
 
-# --- mongocxx & bsoncxx（优先 CMake config，其次 pkg-config）
+# --- mongocxx & bsoncxx
 find_package(mongocxx QUIET)
 find_package(bsoncxx QUIET)
 if (mongocxx_FOUND AND bsoncxx_FOUND)

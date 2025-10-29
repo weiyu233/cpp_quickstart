@@ -4,7 +4,6 @@
 #include <bsoncxx/builder/basic/document.hpp>
 #include <bsoncxx/json.hpp>
 #include <iostream>
-#include <cstdlib>
 
 using bsoncxx::builder::basic::kvp;
 using bsoncxx::builder::basic::make_document;
@@ -55,5 +54,21 @@ void mongo_query_demo(mongocxx::collection& coll) {
     ), opt);
     for (auto&& d : cur) {
         std::cout << "[Mongo] " << bsoncxx::to_json(d) << "\n";
+    }
+}
+
+void mongo_query_update_many_usd_price(mongocxx::collection& coll, double delta) {
+    auto result = coll.update_many(
+        make_document(kvp("currency", "USD")),
+        make_document(kvp("$set", make_document(kvp("price", delta))))
+    );
+
+    std::cout << "[Mongo] Matched " << result->matched_count()
+        << "[Mongo] Modified " << result->modified_count() << "\n";
+
+    auto cursor = coll.find(make_document(kvp("currency", "usd")));
+
+    for (auto&& doc : cursor) {
+        std::cout << "[Mongo] " << bsoncxx::to_json(doc) << std::endl;
     }
 }

@@ -1,10 +1,8 @@
 #include "db_pg.hpp"
-#include <cstdlib>
 #include <iostream>
 #include <sstream>
 
 static std::string make_default_dsn_from_env() {
-    // 从环境变量读取各字段，缺省则给默认值
     auto get = [](const char* k, const char* def) {
         const char* v = std::getenv(k);
         return std::string{ v ? v : def };

@@ -8,16 +8,14 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(SOURCES
     src/main.cpp
     src/bond/bond_service.cpp
-    src/bond/portfolio.cpp
-    src/db/postgres_db.cpp
+        src/db/postgres_db.cpp
     src/db/mongo_db.cpp
 )
 
 set(HEADERS
     include/bond/bond.hpp
     include/bond/bond_service.hpp
-    include/bond/portfolio.hpp
-    include/db/database.hpp
+        include/db/database.hpp
     include/db/postgres_db.hpp
     include/db/mongo_db.hpp
 )

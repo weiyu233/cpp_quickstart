@@ -1,8 +1,6 @@
 #pragma once
-#include "portfolio.hpp"
 #include "../db/database.hpp"
 #include <memory>
-#include <unordered_map>
 #include <string>
 #include <vector>
 
@@ -20,7 +18,6 @@ public:
 private:
     std::shared_ptr<IDatabase> primary_db_;
     std::shared_ptr<IDatabase> analytics_db_;
-    std::unordered_map<std::string, Portfolio> portfolios_;
 
     void ensure_portfolio_exists(const std::string& name);
 };
